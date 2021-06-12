@@ -18,8 +18,8 @@ class MyApp extends StatelessWidget {
 
 
   MyApp(this._matrix) {
-    _matrix.showLoginPage().then((value) {
-      manager.setLoggedIn(!value);
+    _matrix.connect().then((value) {
+      manager.setLoggedIn(value);
     });
   }
 

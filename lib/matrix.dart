@@ -6,21 +6,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Matrix {
 
-  Matrix() {
-    SharedPreferences.getInstance().then((sp) async {
-      if (sp.containsKey("homeserver")) {
-        await client.checkHomeserver(sp.getString("homeserver"));
-        client.init(
-          newDeviceID: sp.getString("deviceId"),
-          newUserID: sp.getString("userId"),
-          newToken: sp.getString("token"),
-          newHomeserver: Uri.parse(sp.getString("homeserver")!),
-          newDeviceName: ''
-        );
-      }
-    });
-  }
-
   final client = Client("AlpakaChat");
 
   static Matrix of(BuildContext context) {
@@ -38,9 +23,21 @@ class Matrix {
     });
   }
 
-  Future<bool> showLoginPage() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    return !preferences.containsKey("homeserver");
+  Future<bool> connect() async {
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    if (sp.containsKey("homeserver")) {
+      await client.checkHomeserver(sp.getString("homeserver"));
+      client.init(
+          newDeviceID: sp.getString("deviceId"),
+          newUserID: sp.getString("userId"),
+          newToken: sp.getString("token"),
+          newHomeserver: Uri.parse(sp.getString("homeserver")!),
+          newDeviceName: ''
+      );
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }
