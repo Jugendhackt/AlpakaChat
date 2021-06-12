@@ -55,7 +55,11 @@ class _loginwidget extends State<Loginwidget>{
           child: SizedBox(
             width: 300,
             child: TextField(
-
+              decoration: InputDecoration(
+                hintText: "Server",
+                contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                border: OutlineInputBorder()
+              ),
             ),
           ),
         ),
