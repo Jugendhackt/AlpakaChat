@@ -111,8 +111,11 @@ class _loginwidget extends State<Loginwidget>{
                       )
                   ),
                   onPressed: (){
-                    Matrix.of(context).login(_serverTextController.text, _userTextController.text, _passwordTextController.text);
-                    AppStateManager.of(context).setLoggedIn(true);
+                    Matrix.of(context).login(_serverTextController.text, _userTextController.text, _passwordTextController.text).then((value) {
+                      if (value) {
+                        AppStateManager.of(context).setLoggedIn(true);
+                      }
+                    });
                   },
                 )
             ),

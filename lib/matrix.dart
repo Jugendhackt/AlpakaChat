@@ -12,7 +12,7 @@ class Matrix {
     return (context.getElementForInheritedWidgetOfExactType<MatrixWidget>()!.widget as MatrixWidget).matrix;
   }
 
-  Future login(String homeserver, String username, String password) async {
+  Future<bool> login(String homeserver, String username, String password) async {
     WellKnownInformation homeserverData = await client.checkHomeserver(homeserver);
     LoginResponse login = await client.login(user: username, password: password, deviceId: "lol");
     SharedPreferences.getInstance().then((sp) {
@@ -21,6 +21,7 @@ class Matrix {
       sp.setString("userId", login.userId);
       sp.setString("deviceId", login.deviceId);
     });
+    return login != null;
   }
 
   Future<bool> connect() async {
