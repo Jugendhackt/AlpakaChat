@@ -3,6 +3,7 @@
 
 
 import 'package:alpaka_chat/views/appstate.dart';
+import 'package:famedlysdk/famedlysdk.dart';
 import 'package:flutter/material.dart';
 
 import '../matrix.dart';
@@ -48,10 +49,11 @@ class _homeview extends State<Homeview>{
             stream: Matrix.of(context).client.onRoomUpdate.stream,
             builder: (context, snap2) => ListView(
               children: (snapshot.data! as List<String>).map((id) {
-                if (Matrix.of(context).client.getRoomById(id) == null) return Container();
+                Room room = Matrix.of(context).client.getRoomById(id);
+                if (room == null) return Container();
                 return ListTile(
-                  leading: Icon(Icons.account_box),
-                  title: Text(Matrix.of(context).client.getRoomById(id).displayname),
+                  leading: Icon(room.isUnread ? Icons.notification_important : Icons.account_box),
+                  title: Text(room.displayname),
                   subtitle: Text("Letzte Nachricht von " + Matrix.of(context).client.getRoomById(id).displayname),
                   onTap: () {},
                 );
