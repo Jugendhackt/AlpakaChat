@@ -56,15 +56,16 @@ class SendMessageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 100,
+      height: 76,
       child: Column(
         children: [
           TextField(
             controller: _controller,
           ),
-          ElevatedButton(onPressed: () {
+          OutlineButton(onPressed: () {
+            if(_controller.text != ""){
             _room.sendTextEvent(_controller.text);
-            _controller.clear();
+            _controller.clear();}
           }, child: Text("Senden"))
         ],
       ),
