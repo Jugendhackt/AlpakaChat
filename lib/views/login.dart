@@ -89,7 +89,7 @@ class _loginwidget extends State<Loginwidget>{
             ),
           ),
           OutlineButton(
-            onPressed: () => serverloader(context),
+            onPressed: () => serverloader(context, _serverTextController),
             child: Text("Serverauswahl"),
 
           ),
