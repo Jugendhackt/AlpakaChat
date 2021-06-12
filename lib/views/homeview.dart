@@ -44,13 +44,19 @@ class _homeview extends State<Homeview>{
         builder: (context, snapshot) {
           if (snapshot.hasError) return Text(snapshot.error.toString());
           if (!snapshot.hasData) return CircularProgressIndicator();
-          return ListView(
-            children: (snapshot.data! as List<String>).map((id) => ListTile(
-              leading: Icon(Icons.account_box),
-              title: Text(Matrix.of(context).client.getRoomById(id).displayname),
-              subtitle: Text("Letzte Nachricht von " + Matrix.of(context).client.getRoomById(id).displayname),
-              onTap: () {},
-            )).toList(),
+          return StreamBuilder(
+            stream: Matrix.of(context).client.onRoomUpdate.stream,
+            builder: (context, snap2) => ListView(
+              children: (snapshot.data! as List<String>).map((id) {
+                if (Matrix.of(context).client.getRoomById(id) == null) return Container();
+                return ListTile(
+                  leading: Icon(Icons.account_box),
+                  title: Text(Matrix.of(context).client.getRoomById(id).displayname),
+                  subtitle: Text("Letzte Nachricht von " + Matrix.of(context).client.getRoomById(id).displayname),
+                  onTap: () {},
+                );
+              }).toList(),
+            ),
           );
         },
       ),
