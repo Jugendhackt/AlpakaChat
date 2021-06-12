@@ -1,47 +1,51 @@
+import 'dart:async';
+
+import 'package:alpaka_chat/views/appstate.dart';
+import 'package:alpaka_chat/views/homeview.dart';
 import 'package:alpaka_chat/views/login.dart';
 import 'package:alpaka_chat/matrix.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   Matrix matrix = new Matrix();
-  matrix.showLoginPage().then((value) {
-    runApp(MyApp(matrix, value));
-  });
+  runApp(MyApp(matrix));
 }
 
 class MyApp extends StatelessWidget {
 
   final Matrix _matrix;
-  final bool startLoggedIn;
+  final AppStateManager manager = new AppStateManager();
 
-  MyApp(this._matrix, this.startLoggedIn);
+
+  MyApp(this._matrix) {
+    _matrix.showLoginPage().then((value) {
+      manager.setLoggedIn(!value);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return MatrixWidget(MaterialApp(
-      title: 'Alpaka Chat',
-      theme: ThemeData(
-        brightness: Brightness.light,
-        primarySwatch: Colors.blue,
-
-      ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-      ),
-      home: MyHomePage(),
-    ), _matrix);
+    return AppStateWidget(MatrixWidget(StreamBuilder(
+        stream: manager.stream.stream,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            if (snapshot.data is AppState) {
+              AppState appState = snapshot.data as AppState;
+              print(appState.loggedIn ? "User is logged in!" : "User is not logged in!");
+              return MatrixWidget(MaterialApp(
+                title: 'Alpaka Chat',
+                theme: ThemeData(
+                  brightness: Brightness.light,
+                  primarySwatch: Colors.blue,
+                ),
+                darkTheme: ThemeData(
+                  brightness: Brightness.dark,
+                ),
+                home: appState.loggedIn ? Homeview() : Loginwidget(),
+              ), _matrix);
+            }
+          }
+          return CircularProgressIndicator();
+        }), _matrix), manager);
   }
-}
-
-class MyHomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Alpaka Chat"),
-      ),
-      body: Loginwidget(),
-    );
-  }
-
 }
