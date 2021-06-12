@@ -18,16 +18,19 @@ class _homeview extends State<Homeview>{
         title: Text("Deine Chats"),
         centerTitle: true,
         leading: IconButton(
+          tooltip: "Your Profile",
           icon: Icon(Icons.account_circle),
           onPressed: () {},
         ),
         actions: [
           IconButton(
+            tooltip: "Settings",
               alignment: Alignment.centerRight,
               icon: Icon(Icons.settings),
               onPressed: () {}
           ),
           IconButton(
+            tooltip: "Logout",
             alignment: Alignment.centerLeft,
             onPressed: () {
               Matrix.of(context).logout();
