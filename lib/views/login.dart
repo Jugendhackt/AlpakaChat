@@ -14,7 +14,12 @@ class _loginwidget extends State<Loginwidget>{
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.max,
       children: [
-        Text("Login", style: TextStyle(fontSize: 50), textAlign: TextAlign.center),
+        Container(
+          alignment: Alignment.center,
+          padding: EdgeInsets.all(20),
+          margin: EdgeInsets.all(20),
+          child: Text("Login", style: TextStyle(fontSize: 50), textAlign: TextAlign.center),
+        ),
         SizedBox(
           width: 300,
           child: TextField(
@@ -35,22 +40,27 @@ class _loginwidget extends State<Loginwidget>{
             ),
           ),
         ),
-        SizedBox(
-          width: 200,
-            height: 50,
-            child :OutlinedButton(
-              child: Text("Submit", style: TextStyle(fontSize: 20),),
-              style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all(Colors.white),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50),
-                          side: BorderSide(color: Colors.white)
-                      )
-                  )
-              ),
-              onPressed: (){},
-            )
+        Container(
+          alignment: Alignment.center,
+          padding: EdgeInsets.all(20),
+          margin: EdgeInsets.all(20),
+          child: SizedBox(
+              width: 200,
+              height: 50,
+              child :OutlinedButton(
+                child: Text("Submit", style: TextStyle(fontSize: 20),),
+                style: ButtonStyle(
+                    foregroundColor: MaterialStateProperty.all(Colors.white),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50),
+                            side: BorderSide(color: Colors.white)
+                        )
+                    )
+                ),
+                onPressed: (){},
+              )
+          ),
         )
       ],
     );
