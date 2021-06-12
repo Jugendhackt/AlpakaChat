@@ -10,9 +10,7 @@ class Loginwidget extends StatefulWidget{
 class _loginwidget extends State<Loginwidget>{
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisSize: MainAxisSize.max,
+    return ListView(
       children: [
         Container(
           alignment: Alignment.center,
