@@ -35,6 +35,11 @@ class Matrix {
     });
   }
 
+  Future<bool> showLoginPage() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return !preferences.containsKey("homeserver");
+  }
+
 }
 
 class MatrixWidget extends InheritedWidget {
