@@ -1,12 +1,9 @@
-
-
-
-
 import 'package:alpaka_chat/views/appstate.dart';
 import 'package:famedlysdk/famedlysdk.dart';
 import 'package:flutter/material.dart';
 
 import '../matrix.dart';
+import 'chatpage.dart';
 
 class Homeview extends StatefulWidget{
   @override
@@ -55,7 +52,11 @@ class _homeview extends State<Homeview>{
                   leading: Icon(room.isUnread ? Icons.notification_important : Icons.account_box),
                   title: Text(room.displayname),
                   subtitle: Text(room.lastEvent.body),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context, new MaterialPageRoute(
+                      builder: (BuildContext context) => ChatPage(room),
+                    ));
+                  },
                 );
               }).toList(),
             ),
