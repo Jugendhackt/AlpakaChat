@@ -27,6 +27,7 @@ class Matrix {
   Future logout() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     sp.clear();
+    await client.logout();
   }
 
   Future<bool> connect() async {
