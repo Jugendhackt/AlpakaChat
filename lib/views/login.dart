@@ -10,9 +10,13 @@ class Loginwidget extends StatefulWidget{
 class _loginwidget extends State<Loginwidget>{
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return ListView(
       children: [
-        Text("Alpaka Chat"),
+        Text("Login", style: TextStyle(fontSize: 50),),
+        Text("Email:", style: TextStyle(fontSize: 20),),
+        TextField(
+
+        )
       ],
     );
   }
