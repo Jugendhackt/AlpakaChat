@@ -88,17 +88,10 @@ class _loginwidget extends State<Loginwidget>{
               ),
             ),
           ),
-          Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.all(5),
-            margin: EdgeInsets.all(5),
-            child: SizedBox(
-              width: 300,
-              child: OutlineButton(
-                onPressed: () => serverloader(context),
-                child: Text("Serverauswahl"),
-              ),
-            ),
+          OutlineButton(
+            onPressed: () => serverloader(context),
+            child: Text("Serverauswahl"),
+
           ),
           Container(
             alignment: Alignment.center,
