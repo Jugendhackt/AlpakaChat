@@ -24,6 +24,11 @@ class Matrix {
     return login != null;
   }
 
+  Future logout() async {
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    sp.clear();
+  }
+
   Future<bool> connect() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     if (sp.containsKey("homeserver")) {
