@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 void main() {
   Matrix matrix = new Matrix();
   matrix.showLoginPage().then((value) {
+    print(value ? "User is not logged in!" : "User is logged in!");
     runApp(MyApp(matrix, value));
   });
 }

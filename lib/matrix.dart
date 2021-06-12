@@ -10,10 +10,12 @@ class Matrix {
     SharedPreferences.getInstance().then((sp) async {
       if (sp.containsKey("homeserver")) {
         await client.checkHomeserver(sp.getString("homeserver"));
-        await client.login(
-            type: AuthenticationTypes.token,
-            token: sp.getString("token"),
-            user: sp.getString("username")
+        client.init(
+          newDeviceID: sp.getString("deviceId"),
+          newUserID: sp.getString("userId"),
+          newToken: sp.getString("token"),
+          newHomeserver: Uri.parse(sp.getString("homeserver")!),
+          newDeviceName: ''
         );
       }
     });
@@ -27,11 +29,12 @@ class Matrix {
 
   Future login(String homeserver, String username, String password) async {
     WellKnownInformation homeserverData = await client.checkHomeserver(homeserver);
-    LoginResponse login = await client.login(user: username, password: password);
+    LoginResponse login = await client.login(user: username, password: password, deviceId: "lol");
     SharedPreferences.getInstance().then((sp) {
       sp.setString("homeserver", homeserver);
-      sp.setString("username", username);
       sp.setString("token", login.accessToken);
+      sp.setString("userId", login.userId);
+      sp.setString("deviceId", login.deviceId);
     });
   }
 

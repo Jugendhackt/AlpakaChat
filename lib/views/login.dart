@@ -2,12 +2,20 @@
 
 import 'package:flutter/material.dart';
 
+import '../matrix.dart';
+
 class Loginwidget extends StatefulWidget{
   @override
   State<StatefulWidget> createState() => _loginwidget();
 }
 
 class _loginwidget extends State<Loginwidget>{
+
+  TextEditingController _serverTextController = new TextEditingController();
+  TextEditingController _userTextController = new TextEditingController();
+  TextEditingController _passwordTextController = new TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -25,8 +33,9 @@ class _loginwidget extends State<Loginwidget>{
           child: SizedBox(
             width: 300,
             child: TextField(
+              controller: _userTextController,
               decoration: InputDecoration(
-                  hintText: "Email",
+                  hintText: "User",
                   contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                   border: OutlineInputBorder()
               ),
@@ -40,6 +49,7 @@ class _loginwidget extends State<Loginwidget>{
           child: SizedBox(
             width: 300,
             child: TextField(
+              controller: _passwordTextController,
               decoration: InputDecoration(
                   hintText: "Password",
                   contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
@@ -55,6 +65,7 @@ class _loginwidget extends State<Loginwidget>{
           child: SizedBox(
             width: 300,
             child: TextField(
+              controller: _serverTextController,
               decoration: InputDecoration(
                 hintText: "Server",
                 contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
@@ -82,7 +93,7 @@ class _loginwidget extends State<Loginwidget>{
                     )
                 ),
                 onPressed: (){
-                  //Login daten überprüfen
+                  Matrix.of(context).login(_serverTextController.text, _userTextController.text, _passwordTextController.text);
                 },
               )
           ),
