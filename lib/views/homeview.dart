@@ -39,34 +39,12 @@ class _homeview extends State<Homeview>{
                 ],
               )
           ),
-          Container(
-            alignment: Alignment.topLeft,
-            padding: EdgeInsets.all(20),
-            child: Row(
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      child: Icon(Icons.account_box_outlined, size: 100,),
-                    ),
-                    Column(
-                      children: [
-                        Text(
-                          "Kontakt 1",
-                          style: TextStyle(fontSize: 20),
-                          textAlign: TextAlign.left,
-                        ),
-                        Text(
-                          "Letzte Nachticht von Kontakt 1",
-                          style: TextStyle(fontSize: 10),
-                        )
-                      ],
-                    )
-                  ],
-                )
-              ],
-            ),
-          )
+          ListTile(
+            leading: Icon(Icons.account_box),
+            title: Text("Kontakt 1"),
+            subtitle: Text("Letzte Nachricht von kontakt 1"),
+            onTap: () {},
+          ),
         ],
       ),
     );
