@@ -1,5 +1,7 @@
 
 
+import 'dart:html';
+
 import 'package:alpaka_chat/views/serverview.dart';
 import 'package:alpaka_chat/views/appstate.dart';
 import 'package:flutter/material.dart';
@@ -56,6 +58,7 @@ class _loginwidget extends State<Loginwidget>{
               width: 300,
               child: TextField(
                 controller: _passwordTextController,
+                obscureText: true,
                 decoration: InputDecoration(
                     hintText: "Password",
                     contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
