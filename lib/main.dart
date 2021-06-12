@@ -1,19 +1,29 @@
+import 'package:alpaka_chat/matrix.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  Matrix matrix = new Matrix();
+  matrix.showLoginPage().then((value) {
+    runApp(MyApp(matrix, value));
+  });
 }
 
 class MyApp extends StatelessWidget {
+
+  final Matrix _matrix;
+  final bool startLoggedIn;
+
+  MyApp(this._matrix, this.startLoggedIn);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MatrixWidget(MaterialApp(
       title: 'Alpaka Chat',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(),
-    );
+    ), _matrix);
   }
 }
 
