@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 
 import 'login.dart';
 
-serverloader(var context){
+serverloader(var context, final TextEditingController servertextcontroler){
   Navigator.of(context).push(
     MaterialPageRoute<void>(builder: (BuildContext context){
       return Scaffold(
@@ -22,7 +22,7 @@ serverloader(var context){
               if(snapshot.hasData){
                 var data = snapshot.data;
                 Map<String, dynamic> parsedjson = jsonDecode("$data");
-                return Serverwidget(parsedjson);
+                return Serverwidget(parsedjson, servertextcontroler);
               }
               return LinearProgressIndicator();
             },
@@ -37,8 +37,8 @@ Future<String> getServerjson() async{
   return await rootBundle.loadString("servers.json");
 }
 class Serverwidget extends StatelessWidget{
-  var data;
-  Serverwidget(this.data);
+  var data, servertextcontroler;
+  Serverwidget(this.data, this.servertextcontroler);
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -54,6 +54,7 @@ class Serverwidget extends StatelessWidget{
                     onTap: (){
                       Navigator.pop(context);
                       print(data["$i"][1]);
+                      servertextcontroler.text = data["$i"][1];
                     },
                   )
                 ],
