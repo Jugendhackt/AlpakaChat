@@ -20,23 +20,33 @@ class _loginwidget extends State<Loginwidget>{
           margin: EdgeInsets.all(20),
           child: Text("Login", style: TextStyle(fontSize: 50), textAlign: TextAlign.center),
         ),
-        SizedBox(
-          width: 300,
-          child: TextField(
-            decoration: InputDecoration(
-                hintText: "Email",
-                contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                border: OutlineInputBorder()
+        Container(
+          alignment: Alignment.center,
+          padding: EdgeInsets.all(5),
+          margin: EdgeInsets.all(5),
+          child: SizedBox(
+            width: 300,
+            child: TextField(
+              decoration: InputDecoration(
+                  hintText: "Email",
+                  contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                  border: OutlineInputBorder()
+              ),
             ),
           ),
         ),
-        SizedBox(
-          width: 300,
-          child: TextField(
-            decoration: InputDecoration(
-                hintText: "Password",
-                contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                border: OutlineInputBorder()
+        Container(
+          alignment: Alignment.center,
+          padding: EdgeInsets.all(5),
+          margin: EdgeInsets.all(5),
+          child: SizedBox(
+            width: 300,
+            child: TextField(
+              decoration: InputDecoration(
+                  hintText: "Password",
+                  contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                  border: OutlineInputBorder()
+              ),
             ),
           ),
         ),
@@ -58,7 +68,9 @@ class _loginwidget extends State<Loginwidget>{
                         )
                     )
                 ),
-                onPressed: (){},
+                onPressed: (){
+                  //Login daten überprüfen
+                },
               )
           ),
         )
