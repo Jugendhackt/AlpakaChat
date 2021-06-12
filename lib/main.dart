@@ -1,3 +1,4 @@
+import 'package:alpaka_chat/views/login.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -21,7 +22,10 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text("Hello Alpaka"),
+      appBar: AppBar(
+        title: Text("Alpaka Chat"),
+      ),
+      body: Loginwidget(),
     );
   }
 
