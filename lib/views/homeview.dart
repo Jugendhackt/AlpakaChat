@@ -2,6 +2,7 @@
 
 
 
+import 'package:alpaka_chat/views/appstate.dart';
 import 'package:flutter/material.dart';
 
 import '../matrix.dart';
@@ -18,19 +19,23 @@ class _homeview extends State<Homeview>{
       appBar: AppBar(
         title: Text("Deine Chats"),
         centerTitle: true,
+        leading: IconButton(
+          icon: Icon(Icons.account_circle),
+          onPressed: () {},
+        ),
         actions: [
-          IconButton(
-            icon: Icon(Icons.account_circle),
-            iconSize: 50,
-            splashRadius: 30,
-            onPressed: () {},
-          ),
           IconButton(
               alignment: Alignment.centerRight,
               icon: Icon(Icons.settings),
-              iconSize: 50,
-              splashRadius: 30,
               onPressed: () {}
+          ),
+          IconButton(
+            alignment: Alignment.centerLeft,
+            onPressed: () {
+              Matrix.of(context).logout();
+              AppStateManager.of(context).setLoggedIn(false);
+              },
+            icon: Icon(Icons.exit_to_app),
           )
         ]
       ),
