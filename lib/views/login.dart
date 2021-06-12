@@ -1,5 +1,6 @@
 
 
+import 'package:alpaka_chat/views/appstate.dart';
 import 'package:flutter/material.dart';
 
 import '../matrix.dart';
@@ -94,6 +95,7 @@ class _loginwidget extends State<Loginwidget>{
                 ),
                 onPressed: (){
                   Matrix.of(context).login(_serverTextController.text, _userTextController.text, _passwordTextController.text);
+                  AppStateManager.of(context).setLoggedIn(true);
                 },
               )
           ),
