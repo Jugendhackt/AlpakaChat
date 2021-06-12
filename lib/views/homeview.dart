@@ -54,7 +54,7 @@ class _homeview extends State<Homeview>{
                 return ListTile(
                   leading: Icon(room.isUnread ? Icons.notification_important : Icons.account_box),
                   title: Text(room.displayname),
-                  subtitle: Text("Letzte Nachricht von " + Matrix.of(context).client.getRoomById(id).displayname),
+                  subtitle: Text(room.lastEvent.body),
                   onTap: () {},
                 );
               }).toList(),
