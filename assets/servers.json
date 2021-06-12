@@ -1,12 +1,12 @@
 {
-  "1" : {
-    "name" : "konradrundfunk.me",
-    "url" : "matrix.konradrundfunk.me",
-    "maintainer" : "konradrundfunk"
-  },
-  "2" : {
-    "name" : "matrix.org",
-    "url" : "matrix.org",
-    "maintainer" : "Matrix org Foundation"
-  }
+  "0" : [
+    "konradrundfunk.me",
+    "https://matrix.konradrundfunk.me",
+    "konradrundfunk"
+  ],
+  "1" : [
+    "matrix.org",
+    "https://matrix.org",
+    "Matrix org foundation"
+  ]
 }

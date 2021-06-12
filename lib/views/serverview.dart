@@ -1,12 +1,10 @@
 
 import 'dart:convert';
-import 'dart:js';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:http/http.dart' as http;
 
-import 'package:flutter/material.dart';
+import 'login.dart';
 
 serverloader(var context){
   Navigator.of(context).push(
@@ -19,11 +17,14 @@ serverloader(var context){
             future: getServerjson(),
             builder: (context, snapshot){
               if(snapshot.hasError){
+                Text("konnte das Json nicht laden");
               }
               if(snapshot.hasData){
+                var data = snapshot.data;
+                Map<String, dynamic> parsedjson = jsonDecode("$data");
+                return Serverwidget(parsedjson);
               }
-              var data = snapshot.data;
-              return Serverwidget(json.decode("$data"));
+              return LinearProgressIndicator();
             },
           ),
         );
@@ -37,45 +38,38 @@ Future<String> getServerjson() async{
 }
 class Serverwidget extends StatelessWidget{
   var data;
-  Serverwidget(var data);
-
+  Serverwidget(this.data);
   @override
   Widget build(BuildContext context) {
-
     return ListView.builder(
+      itemCount: data.values.length,
         itemBuilder: (BuildContext context, var i){
           return Center(
             child: Card(
               child: Column(
                 children: [
-                  Text("$data")
+                  ListTile(
+                    title: Text(data["$i"][0]),
+                    subtitle: Text(data["$i"][2]),
+                    onTap: (){
+                      Navigator.pop(context);
+                      print(data["$i"][1]);
+                    },
+                  )
                 ],
-              ),  
+              ),
             ),
           );
         }
     );
-  }
-
-}
-
-
-class Album {
-  final String hostname;
-  final String description;
-  final String category;
-
-  Album({
-    required this.hostname,
-    required this.description,
-    required this.category,
-  });
-
-  factory Album.fromJson(Map<String, dynamic> json) {
-    return Album(
-      hostname: json['hostname'],
-      description: json['description'],
-      category: json['category'],
+    /*
+    return ListView(
+      children: data.entries.map((url) =>
+          Text(
+              url.value.toString())).toList().cast<Text>(),
     );
+
+*/
+
   }
 }
