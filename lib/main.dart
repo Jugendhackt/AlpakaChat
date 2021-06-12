@@ -1,3 +1,4 @@
+import 'package:alpaka_chat/views/login.dart';
 import 'package:alpaka_chat/matrix.dart';
 import 'package:flutter/material.dart';
 
@@ -20,8 +21,12 @@ class MyApp extends StatelessWidget {
     return MatrixWidget(MaterialApp(
       title: 'Alpaka Chat',
       theme: ThemeData(
+        brightness: Brightness.light,
         primarySwatch: Colors.blue,
 
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
       ),
       home: MyHomePage(),
     ), _matrix);
@@ -32,7 +37,10 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text("Hello Alpaka"),
+      appBar: AppBar(
+        title: Text("Alpaka Chat"),
+      ),
+      body: Loginwidget(),
     );
   }
 
