@@ -43,7 +43,7 @@ class _homeview extends State<Homeview>{
             children: (snapshot.data! as List<String>).map((id) => ListTile(
               leading: Icon(Icons.account_box),
               title: Text(Matrix.of(context).client.getRoomById(id).displayname),
-              subtitle: Text("Letzte Nachricht von kontakt 1"),
+              subtitle: Text("Letzte Nachricht von " + Matrix.of(context).client.getRoomById(id).displayname),
               onTap: () {},
             )).toList(),
           );
