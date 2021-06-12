@@ -12,7 +12,9 @@ class _loginwidget extends State<Loginwidget>{
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text("Alpaka Chat"),
+        TextField(
+
+        )
       ],
     );
   }
