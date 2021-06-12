@@ -18,27 +18,35 @@ class _homeview extends State<Homeview>{
         title: Text("Deine Chats"),
         centerTitle: true,
         leading: IconButton(
-          tooltip: "Your Profile",
-          icon: Icon(Icons.account_circle),
-          onPressed: () {},
-        ),
-        actions: [
-          IconButton(
-            tooltip: "Settings",
+              tooltip: "Your Account",
               alignment: Alignment.centerRight,
-              icon: Icon(Icons.settings),
-              onPressed: () {}
-          ),
-          IconButton(
-            tooltip: "Logout",
-            alignment: Alignment.centerLeft,
-            onPressed: () {
-              Matrix.of(context).logout();
-              AppStateManager.of(context).setLoggedIn(false);
+              icon: Icon(Icons.account_circle),
+              onPressed: (){},
+            ),
+          actions: [
+            IconButton(
+                tooltip: "Settings",
+                alignment: Alignment.centerRight,
+                icon: Icon(Icons.settings),
+                onPressed: () {}
+            ),
+            IconButton(
+              tooltip: "Logout",
+              alignment: Alignment.centerLeft,
+              onPressed: () {
+                Matrix.of(context).logout();
+                AppStateManager.of(context).setLoggedIn(false);
               },
-            icon: Icon(Icons.exit_to_app),
-          )
-        ]
+              icon: Icon(Icons.exit_to_app),
+            )
+          ]
+        ),
+      floatingActionButton: FloatingActionButton(
+        elevation: 100,
+        backgroundColor: Colors.grey,
+        tooltip: "New Chat",
+        onPressed: () {},
+        child: Icon(Icons.add),
       ),
       body: FutureBuilder(
         future: Matrix.of(context).client.getJoinedRooms(),
