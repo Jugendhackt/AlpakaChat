@@ -52,6 +52,17 @@ class _loginwidget extends State<Loginwidget>{
         ),
         Container(
           alignment: Alignment.center,
+          padding: EdgeInsets.all(5),
+          margin: EdgeInsets.all(5),
+          child: SizedBox(
+            width: 300,
+            child: TextField(
+
+            ),
+          ),
+        ),
+        Container(
+          alignment: Alignment.center,
           padding: EdgeInsets.all(20),
           margin: EdgeInsets.all(20),
           child: SizedBox(
