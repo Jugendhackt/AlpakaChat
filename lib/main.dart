@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
       title: 'Alpaka Chat',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+
       ),
       home: MyHomePage(),
     ), _matrix);
