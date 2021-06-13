@@ -20,7 +20,10 @@ class ChatPage extends StatelessWidget {
       ),
       body: StreamBuilder(
         stream: Matrix.of(context).client.onEvent.stream,
-        builder: (context, snapshot) => _MessageView(room),
+        builder: (context, snapshot) {
+          if (room.isUnread) room.setUnread(false);
+          return _MessageView(room);
+        },
       ),
     );
   }
