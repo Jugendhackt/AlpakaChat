@@ -41,8 +41,10 @@ class _MessageView extends StatelessWidget {
         if (snapshot.hasError) return Text(snapshot.error.toString());
         if (!snapshot.hasData) return CircularProgressIndicator();
         TimelineHistoryResponse historyResponse = snapshot.data as TimelineHistoryResponse;
-        Iterable<MatrixEvent> events = historyResponse.chunk.reversed;
-        List<Widget> messageView = events.map((event) {
+        List<Widget> messageView = [];
+        messageView.add(SendMessageWidget(_room));
+        messageView.add(Divider());
+        messageView.addAll(historyResponse.chunk.map((event) {
           if (event.type == "m.room.message") {
             return ListTile(
               title: Text("${event.senderId}"),
@@ -56,11 +58,10 @@ class _MessageView extends StatelessWidget {
             );
           }
           return Container();
-        }).toList();
-        messageView.add(Divider());
-        messageView.add(SendMessageWidget(_room));
+        }).toList());
         return ListView(
           children: messageView,
+          reverse: true,
         );
       },
     );
