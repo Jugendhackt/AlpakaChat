@@ -8,8 +8,10 @@ import '../matrix.dart';
 class ChatPage extends StatelessWidget {
   
   final Room room;
-  
-  ChatPage(this.room);
+  final SendMessageWidget _sendMessageWidget;
+
+  ChatPage(this.room) :
+        _sendMessageWidget = SendMessageWidget(room);
   
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class ChatPage extends StatelessWidget {
         stream: Matrix.of(context).client.onEvent.stream,
         builder: (context, snapshot) {
           if (room.isUnread) room.setUnread(false);
-          return _MessageView(room);
+          return _MessageView(room, _sendMessageWidget);
         },
       ),
     );
@@ -33,8 +35,9 @@ class ChatPage extends StatelessWidget {
 class _MessageView extends StatelessWidget {
 
   final Room _room;
+  final SendMessageWidget _sendMessageWidget;
 
-  _MessageView(this._room);
+  _MessageView(this._room, this._sendMessageWidget);
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +48,7 @@ class _MessageView extends StatelessWidget {
         if (!snapshot.hasData) return CircularProgressIndicator();
         TimelineHistoryResponse historyResponse = snapshot.data as TimelineHistoryResponse;
         List<Widget> messageView = [];
-        messageView.add(SendMessageWidget(_room));
+        messageView.add(_sendMessageWidget);
         messageView.add(Divider());
         messageView.addAll(historyResponse.chunk.map((event) {
           if (event.type == "m.room.message") {
