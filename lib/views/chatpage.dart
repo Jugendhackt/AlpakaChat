@@ -61,20 +61,24 @@ class SendMessageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 76,
-      child: Column(
+    return Padding(
+      padding: EdgeInsets.fromLTRB(15, 5, 15, 30),
+      child: Stack(
         children: [
           TextField(
             controller: _controller,
           ),
-          FlatButton(
-            onPressed: () {
-            if(_controller.text != ""){
-            _room.sendTextEvent(_controller.text);
-            _controller.clear();}
-          },
-            child: Icon(Icons.send),)
+          Align(
+            child: MaterialButton(
+                onPressed: () {
+                  if(_controller.text != ""){
+                    _room.sendTextEvent(_controller.text);
+                    _controller.clear();}
+                },
+                child: Icon(Icons.send)
+            ),
+            alignment: Alignment.bottomRight,
+          )
         ],
       ),
     );
