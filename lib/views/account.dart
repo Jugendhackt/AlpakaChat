@@ -46,7 +46,7 @@ class _settingsviewstate extends State<Settingsview>{
                 ListTile(
                   title: Text("Dieses Projekt ist unter der Lizenz GPL V3 veröffentlicht."),
                   subtitle: Text("#jhcgn2021"),
-                  onTap: () => launch(""),
+                  onTap: () => launch("https://www.gnu.org/licenses/gpl-3.0.txt"),
                 )
               ],
             ),
