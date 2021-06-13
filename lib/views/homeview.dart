@@ -3,6 +3,7 @@ import 'package:famedlysdk/famedlysdk.dart';
 import 'package:flutter/material.dart';
 
 import '../matrix.dart';
+import 'account.dart';
 import 'chatpage.dart';
 
 class Homeview extends StatefulWidget{
@@ -21,7 +22,10 @@ class _homeview extends State<Homeview>{
               tooltip: "Your Account",
               alignment: Alignment.centerRight,
               icon: Icon(Icons.account_circle),
-              onPressed: (){},
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Settingsview()),
+              ),
             ),
           actions: [
             IconButton(
