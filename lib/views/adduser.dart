@@ -10,7 +10,6 @@ class AddUser extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       elevation: 100,
-      backgroundColor: Colors.grey,
       tooltip: "New Chat",
       onPressed: () {
         showGeneralDialog(context: context,
