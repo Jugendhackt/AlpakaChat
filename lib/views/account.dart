@@ -1,4 +1,7 @@
+import 'package:famedlysdk/famedlysdk.dart';
 import 'package:flutter/material.dart';
+
+import '../matrix.dart';
 
 class Settingsview extends StatefulWidget{
   @override
@@ -16,20 +19,13 @@ class _settingsviewstate extends State<Settingsview>{
       body: ListView(
         children: [
           Card(
-            child: Padding(padding: EdgeInsets.all(20),
+            child: Padding(padding: EdgeInsets.all(15),
             child: Center(
                 child: Column(
                   children: [
-                    Text(
-                      "Accountname",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 30,
-                      ),
-                    ),
-                    SizedBox(height: 30,),
-                    Image.network('https://picsum.photos/250?image=9')
-
+                    _getaccountname(context),
+                    SizedBox(height: 15,),
+                    Image.network('https://picsum.photos/250?image=9',width: 700,)
                   ],
                 ),
               )
@@ -41,6 +37,38 @@ class _settingsviewstate extends State<Settingsview>{
   }
 }
 
-/*_getaccountname(){
-  return FutureBuilder(builder: builder)
-}*/
+Widget _getaccountname(context){
+  return FutureBuilder(
+      future: (Matrix.of(context).client.getUserProfile(Matrix.of(context).client.userID)),
+      builder: (BuildContext context, snapshot){
+        print(snapshot.data);
+    if(!snapshot.hasData) return CircularProgressIndicator();
+    if(snapshot.hasError) return Text("error");
+    print(snapshot.data);
+    var name = (snapshot.data as Profile).displayname;
+    return Text(
+      "$name",
+      style: TextStyle(
+      fontWeight: FontWeight.w600,
+      fontSize: 30,
+    ),);
+  });
+}
+Widget _getaccountpic(context){
+  return FutureBuilder(
+      future: (Matrix.of(context).client.getUserProfile(Matrix.of(context).client.userID)),
+      builder: (BuildContext context, snapshot){
+        print(snapshot.data);
+        if(!snapshot.hasData) return CircularProgressIndicator();
+        if(snapshot.hasError) return Text("error");
+        print(snapshot.data);
+        var name = (snapshot.data as Profile).displayname;
+        return Text(
+          "$name",
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: 30,
+          ),);
+      });
+}
+
