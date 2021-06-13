@@ -24,6 +24,7 @@ class _settingsviewstate extends State<Settingsview>{
                 child: Column(
                   children: [
                     _getaccountname(context),
+                    _getaccountpic(context),
                     SizedBox(height: 15,),
                     Image.network('https://picsum.photos/250?image=9',width: 700,)
                   ],
@@ -44,7 +45,6 @@ Widget _getaccountname(context){
         print(snapshot.data);
     if(!snapshot.hasData) return CircularProgressIndicator();
     if(snapshot.hasError) return Text("error");
-    print(snapshot.data);
     var name = (snapshot.data as Profile).displayname;
     return Text(
       "$name",
@@ -56,19 +56,14 @@ Widget _getaccountname(context){
 }
 Widget _getaccountpic(context){
   return FutureBuilder(
-      future: (Matrix.of(context).client.getUserProfile(Matrix.of(context).client.userID)),
+      future: (Matrix.of(context).client.getAvatarUrl(Matrix.of(context).client.userID)),
       builder: (BuildContext context, snapshot){
         print(snapshot.data);
         if(!snapshot.hasData) return CircularProgressIndicator();
         if(snapshot.hasError) return Text("error");
         print(snapshot.data);
-        var name = (snapshot.data as Profile).displayname;
-        return Text(
-          "$name",
-          style: TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 30,
-          ),);
+        var name = snapshot.data;
+        return Image.network("$name");
       });
 }
 

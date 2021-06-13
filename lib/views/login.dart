@@ -1,7 +1,4 @@
 
-
-import 'dart:html';
-
 import 'package:alpaka_chat/views/serverview.dart';
 import 'package:alpaka_chat/views/appstate.dart';
 import 'package:flutter/material.dart';
