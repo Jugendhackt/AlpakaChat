@@ -28,7 +28,6 @@ class AddUser extends StatelessWidget {
                     TextField(
                       controller: _usernameController,
                       autocorrect: false,
-                      obscureText: true,
                       decoration: InputDecoration(
                           hintText: "@name:server.de",
                           contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
