@@ -86,10 +86,12 @@ class SendMessageWidget extends StatelessWidget {
           ),
           Align(
             child: MaterialButton(
-                onPressed: () {
+                onPressed: () async {
                   if(_controller.text != ""){
-                    _room.sendTextEvent(_controller.text);
-                    _controller.clear();}
+                    await _room.sendTextEvent(_controller.text);
+                    _controller.clear();
+                    Matrix.of(context).client.onEvent.add(EventUpdate(roomID: _room.id, content: {'body': _controller.text}));
+                  }
                 },
                 child: Icon(Icons.send)
             ),
