@@ -1,5 +1,6 @@
 import 'package:famedlysdk/famedlysdk.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 
 import '../matrix.dart';
 
@@ -21,15 +22,22 @@ class _settingsviewstate extends State<Settingsview>{
           Card(
             child: Padding(padding: EdgeInsets.all(15),
             child: Center(
-                child: Column(
+                child: Row(
                   children: [
-                    _getaccountname(context),
                     _getaccountpic(context),
-                    SizedBox(height: 15,),
-                    Image.network('https://picsum.photos/250?image=9',width: 700,)
                   ],
                 ),
               )
+            ),
+          ),
+          Card(
+            child: Column(
+              children: [
+                ListTile(
+                  title: Text("Mitwirkende:"),
+                  subtitle: Text("Felix \n beppo \n Louis \n Konrad"),
+                )
+              ],
             ),
           )
         ],
@@ -38,32 +46,29 @@ class _settingsviewstate extends State<Settingsview>{
   }
 }
 
-Widget _getaccountname(context){
-  return FutureBuilder(
-      future: (Matrix.of(context).client.getUserProfile(Matrix.of(context).client.userID)),
-      builder: (BuildContext context, snapshot){
-        print(snapshot.data);
-    if(!snapshot.hasData) return CircularProgressIndicator();
-    if(snapshot.hasError) return Text("error");
-    var name = (snapshot.data as Profile).displayname;
-    return Text(
-      "$name",
-      style: TextStyle(
-      fontWeight: FontWeight.w600,
-      fontSize: 30,
-    ),);
-  });
-}
 Widget _getaccountpic(context){
   return FutureBuilder(
-      future: (Matrix.of(context).client.getAvatarUrl(Matrix.of(context).client.userID)),
+      future: ((Matrix.of(context).client.getProfileFromUserId(Matrix.of(context).client.userID))),
       builder: (BuildContext context, snapshot){
         print(snapshot.data);
         if(!snapshot.hasData) return CircularProgressIndicator();
         if(snapshot.hasError) return Text("error");
-        print(snapshot.data);
-        var name = snapshot.data;
-        return Image.network("$name");
-      });
+        final displayname = (snapshot.data as Profile).displayname;
+        final avatar_url = (snapshot.data as Profile).avatarUrl.getThumbnail(Matrix.of(context).client, width: 20 * MediaQuery.of(context).devicePixelRatio, height: 20 * MediaQuery.of(context).devicePixelRatio,);
+        print("$avatar_url");
+        return Row(
+          children: [
+            Image.network("$avatar_url"),
+            SizedBox(width: 30,),
+            Text(
+              "$displayname",
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 30,
+              ),)
+            ],
+          );
+        }
+      );
 }
 
