@@ -49,7 +49,24 @@ class _homeview extends State<Homeview>{
         elevation: 100,
         backgroundColor: Colors.grey,
         tooltip: "New Chat",
-        onPressed: () {},
+        onPressed: () {
+          showGeneralDialog(context: context,
+          pageBuilder: (context, a, b) => Dialog(
+            insetPadding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width / 3, 10, MediaQuery.of(context).size.width / 3, 10),
+            child: Padding(
+              padding: EdgeInsets.all(30),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text("Gebe die ID des Nutzers ein:"),
+                  TextField(),
+                  Container(height: 30),
+                  ElevatedButton(onPressed: () {}, child: Text("Chat starten"))
+                ],
+              ),
+            ),
+          ));
+        },
         child: Icon(Icons.add),
       ),
       body: FutureBuilder(
