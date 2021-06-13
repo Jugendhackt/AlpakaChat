@@ -1,6 +1,6 @@
 import 'package:famedlysdk/famedlysdk.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../matrix.dart';
 
@@ -39,6 +39,17 @@ class _settingsviewstate extends State<Settingsview>{
                 )
               ],
             ),
+          ),
+          Card(
+            child: Column(
+              children: [
+                ListTile(
+                  title: Text("Dieses Projekt ist unter der Lizenz GPL V3 veröffentlicht."),
+                  subtitle: Text("#jhcgn2021"),
+                  onTap: () => launch(""),
+                )
+              ],
+            ),
           )
         ],
       ),
@@ -54,7 +65,7 @@ Widget _getaccountpic(context){
         if(!snapshot.hasData) return CircularProgressIndicator();
         if(snapshot.hasError) return Text("error");
         final displayname = (snapshot.data as Profile).displayname;
-        final avatar_url = (snapshot.data as Profile).avatarUrl.getThumbnail(Matrix.of(context).client, width: 20 * MediaQuery.of(context).devicePixelRatio, height: 20 * MediaQuery.of(context).devicePixelRatio,);
+        final avatar_url = (snapshot.data as Profile).avatarUrl.getThumbnail(Matrix.of(context).client, width: 27 * MediaQuery.of(context).devicePixelRatio, height: 27 * MediaQuery.of(context).devicePixelRatio,);
         print("$avatar_url");
         return Row(
           children: [
