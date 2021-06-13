@@ -13,6 +13,9 @@ class Homeview extends StatefulWidget{
 }
 
 class _homeview extends State<Homeview>{
+
+  final List<String> roomIds = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,10 +55,12 @@ class _homeview extends State<Homeview>{
         builder: (context, snapshot) {
           if (snapshot.hasError) return Text(snapshot.error.toString());
           if (!snapshot.hasData) return CircularProgressIndicator();
+          if (roomIds.isEmpty) roomIds.addAll(snapshot.data as List<String>);
           return StreamBuilder(
             stream: Matrix.of(context).client.onRoomUpdate.stream,
             builder: (context, snap2) {
-              List<Room> rooms = (snapshot.data! as List<String>).map((id) => Matrix.of(context).client.getRoomById(id)).toList();
+              if (snap2.hasData && !roomIds.contains((snap2.data as RoomUpdate).id)) roomIds.add((snap2.data as RoomUpdate).id);
+              List<Room> rooms = (roomIds).map((id) => Matrix.of(context).client.getRoomById(id)).toList();
               rooms = rooms.whereType<Room>().toList();
               rooms.sort((a,b) => b.lastEvent.time.compareTo(a.lastEvent.time));
               return ListView(
