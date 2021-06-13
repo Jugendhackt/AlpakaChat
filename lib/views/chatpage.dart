@@ -138,8 +138,14 @@ class Message extends StatelessWidget {
         constraints: BoxConstraints(maxWidth: 330),
         width: MediaQuery.of(context).size.width / 2,
         child: ListTile(
-          title: Text("${event.senderId}"),
-          subtitle: Text("${event.content['body']}"),
+          title: Text(
+            "${event.senderId}",
+            style: TextStyle(color: Colors.black),
+          ),
+          subtitle: Text(
+            "${event.content['body']}",
+            style: TextStyle(color: Colors.black),
+          ),
         )
     );
   }
