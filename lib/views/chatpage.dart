@@ -52,9 +52,32 @@ class _MessageView extends StatelessWidget {
         messageView.add(Divider());
         messageView.addAll(historyResponse.chunk.map((event) {
           if (event.type == "m.room.message") {
-            return ListTile(
-              title: Text("${event.senderId}"),
-              subtitle: Text("${event.content['body']}"),
+            return Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(15),
+                    topRight: Radius.circular(15),
+                    bottomLeft: Radius.circular(15)
+                ),
+                gradient: LinearGradient(
+                    colors: [Colors.white, Colors.grey],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter
+                ),
+                boxShadow: [BoxShadow(
+                  blurRadius: 20,
+                  offset: Offset(10, 10),
+                  color: Colors.black,
+                ),],
+              ),
+              padding: EdgeInsets.all(5),
+              margin: EdgeInsets.all(10),
+              constraints: BoxConstraints(maxWidth: 330),
+              width: MediaQuery.of(context).size.width / 2,
+              child: ListTile(
+                title: Text("${event.senderId}"),
+                subtitle: Text("${event.content['body']}"),
+              )
             );
           } else if (event.type == "m.room.encrypted") {
             return ListTile(

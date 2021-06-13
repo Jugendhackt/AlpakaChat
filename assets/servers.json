@@ -8,5 +8,15 @@
     "matrix.org",
     "https://matrix-client.matrix.org/",
     "Matrix org foundation"
+  ],
+  "2" : [
+    "Nova IM",
+    "https://novaim.com",
+    "Nova IM server"
+  ],
+  "3" : [
+    "Riotchat",
+    "https://riotchat.de",
+    "Riotchat de Foundation"
   ]
 }
