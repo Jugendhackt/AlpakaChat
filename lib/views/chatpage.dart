@@ -29,7 +29,7 @@ class ChatPage extends StatelessWidget {
 
 class _MessageView extends StatelessWidget {
 
-  Room _room;
+  final Room _room;
 
   _MessageView(this._room);
 
