@@ -34,7 +34,7 @@ serverloader(var context, final TextEditingController servertextcontroler){
 }
 
 Future<String> getServerjson() async{
-  return await rootBundle.loadString("servers.json");
+  return await rootBundle.loadString("assets/servers.json");
 }
 class Serverwidget extends StatelessWidget{
   var data, servertextcontroler;

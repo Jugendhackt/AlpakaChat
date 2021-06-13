@@ -2,7 +2,6 @@
 import 'package:famedlysdk/famedlysdk.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../matrix.dart';
 
@@ -59,8 +58,6 @@ class SendMessageWidget extends StatelessWidget {
     return SizedBox(
       height: 76,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           TextField(
             controller: _controller,
@@ -76,5 +73,4 @@ class SendMessageWidget extends StatelessWidget {
       ),
     );
   }
-
 }
