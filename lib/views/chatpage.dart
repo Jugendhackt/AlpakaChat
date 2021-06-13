@@ -31,6 +31,12 @@ class ChatPage extends StatelessWidget {
                 title: Text("${event.senderId}"),
                 subtitle: Text("${event.content['body']}"),
               );
+            } else if (event.type == "m.room.encrypted") {
+              return ListTile(
+                leading: Icon(Icons.warning_amber_outlined),
+                title: Text("Die Nachricht ist verschlüsselt"),
+                subtitle: Text("Leider kann AlpakaChat noch keine Nachrichten entschlüsseln"),
+              );
             }
             return Container();
           }).toList();
