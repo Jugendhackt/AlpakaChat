@@ -55,11 +55,12 @@ class _homeview extends State<Homeview>{
           if (!snapshot.hasData) return CircularProgressIndicator();
           return StreamBuilder(
             stream: Matrix.of(context).client.onRoomUpdate.stream,
-            builder: (context, snap2) => ListView(
-              children: (snapshot.data! as List<String>).map((id) {
-                Room room = Matrix.of(context).client.getRoomById(id);
-                if (room == null) return Container();
-                return ListTile(
+            builder: (context, snap2) {
+              List<Room> rooms = (snapshot.data! as List<String>).map((id) => Matrix.of(context).client.getRoomById(id)).toList();
+              rooms = rooms.whereType<Room>().toList();
+              rooms.sort((a,b) => b.lastEvent.time.compareTo(a.lastEvent.time));
+              return ListView(
+                children: (rooms).map((room) => ListTile(
                   leading: Icon(room.isUnread ? Icons.notification_important : Icons.account_box),
                   title: Text(room.displayname),
                   subtitle: Text(room.lastEvent.body),
@@ -68,9 +69,9 @@ class _homeview extends State<Homeview>{
                       builder: (BuildContext context) => ChatPage(room),
                     ));
                   },
-                );
-              }).toList(),
-            ),
+                )).toList(),
+              );
+            },
           );
         },
       ),
