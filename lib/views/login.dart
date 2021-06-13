@@ -23,7 +23,7 @@ class _loginwidget extends State<Loginwidget>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Aplaka Chat"),
+        title: Text("Alpaka Chat"),
         centerTitle: true
       ),
       body: ListView(
