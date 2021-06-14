@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:alpaka_chat/views/appstate.dart';
 import 'package:alpaka_chat/views/homeview.dart';
@@ -35,7 +34,7 @@ class MyApp extends StatelessWidget {
               return MatrixWidget(MaterialApp(
                 title: 'Alpaka Chat',
                 theme: ThemeData(
-                  brightness: Brightness.light,
+                  brightness: Brightness.dark,
                   primarySwatch: Colors.blue,
                 ),
                 darkTheme: ThemeData(

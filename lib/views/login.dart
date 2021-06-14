@@ -29,7 +29,7 @@ class _loginwidget extends State<Loginwidget>{
             padding: EdgeInsets.all(10),
             margin: EdgeInsets.all(10),
             child: Text(
-              "Login",
+                "Hi!",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 50,
@@ -37,39 +37,8 @@ class _loginwidget extends State<Loginwidget>{
                 ),
                 ),
           ),
-          Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.all(5),
-            margin: EdgeInsets.all(5),
-            child: SizedBox(
-              width: 300,
-              child: TextField(
-                controller: _userTextController,
-                decoration: InputDecoration(
-                    hintText: "Benutzername",
-                    contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                    border: OutlineInputBorder()
-                ),
-              ),
-            ),
-          ),
-          Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.all(5),
-            margin: EdgeInsets.all(5),
-            child: SizedBox(
-              width: 300,
-              child: TextField(
-                controller: _passwordTextController,
-                obscureText: true,
-                decoration: InputDecoration(
-                    hintText: "Passwort",
-                    contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                    border: OutlineInputBorder()
-                ),
-              ),
-            ),
-          ),
+          _textfield(_userTextController,"Benutzername"),
+          _textfield(_passwordTextController,"Passwort"),
           Container(
             alignment: Alignment.center,
             padding: EdgeInsets.all(5),
@@ -126,4 +95,23 @@ class _loginwidget extends State<Loginwidget>{
       ),
     );
   }
+
+  Widget _textfield(var _TextController,var hint ) => Container(
+    alignment: Alignment.center,
+    padding: EdgeInsets.all(5),
+    margin: EdgeInsets.all(5),
+    child: SizedBox(
+      width: 300,
+      child: TextField(
+        obscureText: (hint == "Passwort")? true : false,
+        controller: _TextController,
+        decoration: InputDecoration(
+            hintText: "$hint",
+            contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+            border: OutlineInputBorder()
+        ),
+      ),
+    ),
+  );
+
 }
