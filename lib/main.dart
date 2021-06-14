@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
                 title: 'Alpaka Chat',
                 theme: ThemeData(
                   brightness: Brightness.light,
-                  primarySwatch: Colors.blue,
+                  primarySwatch: Colors.green,
                 ),
                 darkTheme: ThemeData(
                   brightness: Brightness.dark,
