@@ -2,6 +2,7 @@
 import 'package:famedlysdk/famedlysdk.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:bubble/bubble.dart';
 
 import '../matrix.dart';
 
@@ -125,7 +126,35 @@ class Message extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    bool sendbyself = false;
+    if(Matrix.of(context).client.userID == event.senderId) sendbyself = true;
+    return Bubble(
+      color:  sendbyself ? Colors.greenAccent : Colors.blueAccent,
+      elevation: 0,
+        alignment: sendbyself ? Alignment.topRight : Alignment.topLeft,
+        margin: BubbleEdges.only(bottom: 15),
+      nip: sendbyself ? BubbleNip.rightBottom : BubbleNip.leftBottom,
+      child: Padding(
+        padding: EdgeInsets.all(5),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "${event.senderId.localpart}",
+              style: TextStyle(
+                color: Colors.black54,
+              ),),
+            Text(
+                "${event.content['body']}",
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                ),
+            ),
+          ],
+        ),
+      )
+    );
+/*Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(15),
@@ -140,7 +169,7 @@ class Message extends StatelessWidget {
           boxShadow: [BoxShadow(
             blurRadius: 20,
             offset: Offset(10, 10),
-            color: Colors.black,
+            color: Colors.white54,
           ),],
         ),
         padding: EdgeInsets.all(5),
@@ -157,7 +186,7 @@ class Message extends StatelessWidget {
             style: TextStyle(color: Colors.black),
           ),
         )
-    );
+    );*/
   }
 
 }
