@@ -169,7 +169,7 @@ class Message extends StatelessWidget {
           boxShadow: [BoxShadow(
             blurRadius: 20,
             offset: Offset(10, 10),
-            color: Colors.white54,
+            color: Colors.black,
           ),],
         ),
         padding: EdgeInsets.all(5),
