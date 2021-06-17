@@ -12,16 +12,25 @@ class Matrix {
     return (context.getElementForInheritedWidgetOfExactType<MatrixWidget>()!.widget as MatrixWidget).matrix;
   }
 
+  Future register(String homeserver, String username, String password) async {
+    await client.checkHomeserver(homeserver);
+    processLoginResponse(homeserver, await client.register(username: username, password: password));
+  }
+
   Future<bool> login(String homeserver, String username, String password) async {
     WellKnownInformation homeserverData = await client.checkHomeserver(homeserver);
     LoginResponse login = await client.login(user: username, password: password, deviceId: "lol");
+    processLoginResponse(homeserver, login);
+    return login != null;
+  }
+
+  void processLoginResponse(String homeserver, LoginResponse login) {
     SharedPreferences.getInstance().then((sp) {
       sp.setString("homeserver", homeserver);
       sp.setString("token", login.accessToken);
       sp.setString("userId", login.userId);
       sp.setString("deviceId", login.deviceId);
     });
-    return login != null;
   }
 
   Future logout() async {
