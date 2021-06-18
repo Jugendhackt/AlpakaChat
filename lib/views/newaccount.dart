@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class Loginwidget extends StatefulWidget {
+class registerwidget extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _newaccound();
 }
 
-class _newaccound extends State<Loginwidget> {
+class _newaccound extends State<registerwidget> {
   TextEditingController _usernametextcontroller = new TextEditingController();
   TextEditingController _passwordtextcontroller = new TextEditingController();
   @override
