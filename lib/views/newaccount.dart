@@ -11,6 +11,9 @@ class _newaccound extends State<registerwidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Ein neues Benutzerkonto erstellen"),
+      ),
         body: Container(
             decoration: BoxDecoration(
               color: Color(0xbae3fff0),
@@ -32,17 +35,18 @@ class _newaccound extends State<registerwidget> {
                         SizedBox(
                           width: 30,
                         ),
-                        Text(
-                          "Create new Account",
+                        Expanded(child: Text(
+                          "Ein neues Benutzerkonto erstellen",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: 50,
-                            fontWeight: FontWeight.w600,
+                            fontSize: 30,
+                            fontWeight: FontWeight.w500,
                           ),
-                        ),
+                        )),
                       ],
                     ),
                   )),
+
               _textfield(_usernametextcontroller, "Benutzername"),
               _textfield(_passwordtextcontroller, "Passwort"),
               Container(
