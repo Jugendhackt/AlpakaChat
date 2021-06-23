@@ -1,9 +1,8 @@
-import 'dart:async';
-
 import 'package:alpaka_chat/views/appstate.dart';
 import 'package:alpaka_chat/views/homeview.dart';
 import 'package:alpaka_chat/views/login.dart';
 import 'package:alpaka_chat/matrix.dart';
+import 'package:alpaka_chat/views/welcome.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -41,7 +40,7 @@ class MyApp extends StatelessWidget {
                 darkTheme: ThemeData(
                   brightness: Brightness.dark,
                 ),
-                home: appState.loggedIn ? Homeview() : Loginwidget(),
+                home: appState.loggedIn ? Homeview() : Welcome(),
               ), _matrix);
             }
           }

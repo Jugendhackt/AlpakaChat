@@ -18,10 +18,10 @@ class _loginwidget extends State<Loginwidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        /*appBar: AppBar(
+        appBar: AppBar(
         title: Text("Alpaka Chat"),
         centerTitle: true
-      ),*/
+      ),
         body: Container(
       decoration: BoxDecoration(
         color: Color(0xbae3fff0),
@@ -114,6 +114,7 @@ class _loginwidget extends State<Loginwidget> {
                       if (value) {
                         AppStateManager.of(context).setLoggedIn(true);
                       }
+                      Navigator.pop(context);
                     });
                   },
                 )),
