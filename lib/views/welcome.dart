@@ -19,21 +19,21 @@ class _welcomestate extends State<Welcome>{
     appBar: AppBar(
       backgroundColor: Color(0xdcb1f6cf),
       title: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Image.asset(
             "images/logo.png",
             height: 50,
             width: 50,
           ),
-          SizedBox(width: 20,),
-          Text(
-            "Wilkommen im Alpaka Chat!",
+          Expanded(child: Text(
+            "Wilkommen!",
             style: TextStyle(
               color: Theme.of(context).primaryColor,
               fontWeight: FontWeight.w500,
+              fontSize: 30,
             ),
-          )
+          ))
         ],
       ),
     ),
@@ -42,7 +42,7 @@ class _welcomestate extends State<Welcome>{
         color: Color(0xbae3fff0),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
             height: (MediaQuery.of(context).size.height / 3),
