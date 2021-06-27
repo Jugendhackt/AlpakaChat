@@ -65,11 +65,18 @@ class _homeview extends State<Homeview>{
               rooms.sort((a,b) => b.lastEvent.time.compareTo(a.lastEvent.time));
               return ListView(
                 children: (rooms).map((room) => ListTile(
+                  tileColor: room.isUnread ? Colors.lightGreen : Colors.white,
                   leading:
                   room.avatar?.getThumbnail(Matrix.of(context).client) != null
                       ? Image.network("${room.avatar?.getThumbnail(Matrix.of(context).client, width: 64, height: 64, method: ThumbnailMethod.crop )}")
                       : Icon(room.isUnread ? Icons.notification_important : Icons.account_box),
-                  title: Text(room.displayname),
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(room.displayname),
+                      room.notificationCount == 0 ? Text("") : Text("${room.notificationCount}")
+                    ],
+                  ),
                   subtitle: Text(room.lastEvent.body),
                   onTap: () {
                     Navigator.push(context, new MaterialPageRoute(
