@@ -26,7 +26,7 @@ class ChatPage extends StatelessWidget {
       body: FutureBuilder(
         future: Matrix.of(context).client.getRoomEvents(room.id, room.prev_batch, Direction.b, limit: 200),
         builder: (context, messagesSnap) {
-          if (!messagesSnap.hasData)  return CircularProgressIndicator();
+          if (!messagesSnap.hasData)  return Center(child: CircularProgressIndicator(),);
           if (_messages.isEmpty) _messages.addAll((messagesSnap.data as TimelineHistoryResponse).chunk);
           return StreamBuilder(
             stream: Matrix.of(context).client.onEvent.stream,

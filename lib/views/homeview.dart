@@ -65,7 +65,10 @@ class _homeview extends State<Homeview>{
               rooms.sort((a,b) => b.lastEvent.time.compareTo(a.lastEvent.time));
               return ListView(
                 children: (rooms).map((room) => ListTile(
-                  leading: Icon(room.isUnread ? Icons.notification_important : Icons.account_box),
+                  leading:
+                  room.avatar?.getThumbnail(Matrix.of(context).client) != null
+                      ? Image.network("${room.avatar?.getThumbnail(Matrix.of(context).client, width: 64, height: 64, method: ThumbnailMethod.crop )}")
+                      : Icon(room.isUnread ? Icons.notification_important : Icons.account_box),
                   title: Text(room.displayname),
                   subtitle: Text(room.lastEvent.body),
                   onTap: () {
