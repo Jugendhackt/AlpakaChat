@@ -1,5 +1,5 @@
 // ignore: import_of_legacy_library_into_null_safe
-import 'package:famedlysdk/famedlysdk.dart';
+import 'package:matrix/matrix.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bubble/bubble.dart';
@@ -129,7 +129,7 @@ class Message extends StatelessWidget {
     bool sendbyself = false;
     if(Matrix.of(context).client.userID == event.senderId) sendbyself = true;
     return Bubble(
-      color:  sendbyself ? Colors.greenAccent : Colors.blueAccent,
+      color:  sendbyself ? Colors.green : Colors.blueAccent,
       elevation: 0,
         alignment: sendbyself ? Alignment.topRight : Alignment.topLeft,
         margin: BubbleEdges.only(bottom: 15),
@@ -139,7 +139,7 @@ class Message extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            if (!sendbyself) Text(
               "${event.senderId.localpart}",
               style: TextStyle(
                 color: Colors.black54,
@@ -150,6 +150,28 @@ class Message extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
             ),
+            SizedBox(height: 3,),
+         // Text("${Matrix.of(context).client.presences[Matrix.of(context).client.userID]!.presence.presence}"),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                "${event.originServerTs.hour}:"
+                    + "${(event.originServerTs.minute.bitLength > 0)
+                    ? event.originServerTs.minute
+                    : "0" + "${event.originServerTs.minute}"}",
+                style: TextStyle(
+                    fontSize: 8,
+                    color: Colors.grey[50]
+                ),
+              ),
+              Icon(
+                Icons.check,
+                size: 8,
+                color: Colors.grey[50],
+              )
+            ],
+          )
           ],
         ),
       )

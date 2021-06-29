@@ -1,6 +1,6 @@
 import 'package:alpaka_chat/views/adduser.dart';
 import 'package:alpaka_chat/views/appstate.dart';
-import 'package:famedlysdk/famedlysdk.dart';
+import 'package:matrix/matrix.dart';
 import 'package:flutter/material.dart';
 
 import '../matrix.dart';

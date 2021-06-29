@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 // ignore: import_of_legacy_library_into_null_safe
-import 'package:famedlysdk/famedlysdk.dart';
+import 'package:matrix/matrix.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -19,7 +19,7 @@ class Matrix {
 
   Future<bool> login(String homeserver, String username, String password) async {
     WellKnownInformation homeserverData = await client.checkHomeserver(homeserver);
-    LoginResponse login = await client.login(user: username, password: password, deviceId: "lol");
+    LoginResponse login = await client.login(user: username, password: password, deviceId: "Alpaka Chat");
     processLoginResponse(homeserver, login);
     return login != null;
   }

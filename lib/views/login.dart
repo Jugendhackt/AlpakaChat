@@ -32,8 +32,7 @@ class _loginwidget extends State<Loginwidget> {
                 padding: EdgeInsets.all(10),
                 margin: EdgeInsets.all(10),
                 //color: Colors.greenAccent[100],
-                child: Expanded(
-                  child: Row(
+                child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
@@ -54,7 +53,7 @@ class _loginwidget extends State<Loginwidget> {
                       ),
                     ],
                   ),
-                )),
+                ),
             _textfield(_userTextController, "Benutzername"),
             _textfield(_passwordTextController, "Passwort"),
             Container(
@@ -113,8 +112,11 @@ class _loginwidget extends State<Loginwidget> {
                           .then((value) {
                         if (value) {
                           AppStateManager.of(context).setLoggedIn(true);
+                          Navigator.pop(context);
                         }
-                        Navigator.pop(context);
+                      }).catchError((error, stackTrace) {
+                        print("error: $error");
+                        // Todo: catch error
                       });
                     },
                   )),
@@ -142,3 +144,6 @@ class _loginwidget extends State<Loginwidget> {
         ),
       );
 }
+void snackbar(BuildContext context, var contend) =>
+  ScaffoldMessenger.of(context)
+      .showSnackBar(SnackBar(content: Text('$contend')));
