@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
               ), _matrix);
             }
           }
-          return CircularProgressIndicator();
+          return Center(child : CircularProgressIndicator());
         }), _matrix), manager);
   }
 }

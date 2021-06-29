@@ -6,7 +6,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Matrix {
 
-  final client = Client("AlpakaChat");
+  final client = Client(
+      "AlpakaChat",
+    databaseBuilder: (Client client) async{
+    // Todo: can implement storage encryption
+      final db = FamedlySdkHiveDatabase(client.clientName);
+      await db.open();
+      return db;
+    }
+  );
 
   static Matrix of(BuildContext context) {
     return (context.getElementForInheritedWidgetOfExactType<MatrixWidget>()!.widget as MatrixWidget).matrix;
@@ -40,22 +48,16 @@ class Matrix {
   }
 
   Future<bool> connect() async {
-    SharedPreferences sp = await SharedPreferences.getInstance();
-    if (sp.containsKey("homeserver")) {
-      await client.checkHomeserver(sp.getString("homeserver"));
-      client.init(
-          newDeviceID: sp.getString("deviceId"),
-          newUserID: sp.getString("userId"),
-          newToken: sp.getString("token"),
-          newHomeserver: Uri.parse(sp.getString("homeserver")!),
-          newDeviceName: ''
-      );
+    try{
+      var db = client.database;
+      print("$db");
+      client.init();
       return true;
-    } else {
+    }catch(e){
+      print("catched");
       return false;
     }
   }
-
 }
 
 class MatrixWidget extends InheritedWidget {

@@ -23,7 +23,7 @@ class _homeview extends State<Homeview>{
         title: Text("Deine Chats"),
         centerTitle: true,
         leading: IconButton(
-              tooltip: "Your Account",
+              tooltip: "Dein Konto",
               alignment: Alignment.centerRight,
               icon: Icon(Icons.account_circle),
               onPressed: () => Navigator.push(
@@ -42,6 +42,7 @@ class _homeview extends State<Homeview>{
               tooltip: "Logout",
               alignment: Alignment.centerLeft,
               onPressed: () {
+                Matrix.of(context).client.database.clear(Matrix.of(context).client.id);
                 Matrix.of(context).logout();
                 AppStateManager.of(context).setLoggedIn(false);
               },

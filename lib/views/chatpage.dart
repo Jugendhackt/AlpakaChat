@@ -128,11 +128,13 @@ class Message extends StatelessWidget {
   Widget build(BuildContext context) {
     bool sendbyself = false;
     if(Matrix.of(context).client.userID == event.senderId) sendbyself = true;
-    return Bubble(
+    return _chatbubble(sendbyself);
+  }
+  _chatbubble(bool sendbyself) => Bubble(
       color:  sendbyself ? Colors.green : Colors.blueAccent,
       elevation: 0,
-        alignment: sendbyself ? Alignment.topRight : Alignment.topLeft,
-        margin: BubbleEdges.only(bottom: 15),
+      alignment: sendbyself ? Alignment.topRight : Alignment.topLeft,
+      margin: BubbleEdges.only(bottom: 15),
       nip: sendbyself ? BubbleNip.rightBottom : BubbleNip.leftBottom,
       child: Padding(
         padding: EdgeInsets.all(5),
@@ -145,70 +147,36 @@ class Message extends StatelessWidget {
                 color: Colors.black54,
               ),),
             Text(
-                "${event.content['body']}",
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                ),
+              "${event.content['body']} ${event.content['body'].length}",
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: event.content['body'].length < 2 ? 20 : 12
+              ),
             ),
             SizedBox(height: 3,),
-         // Text("${Matrix.of(context).client.presences[Matrix.of(context).client.userID]!.presence.presence}"),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                "${event.originServerTs.hour}:"
-                    + "${(event.originServerTs.minute.bitLength > 0)
-                    ? event.originServerTs.minute
-                    : "0" + "${event.originServerTs.minute}"}",
-                style: TextStyle(
-                    fontSize: 8,
-                    color: Colors.grey[50]
+            // Text("${Matrix.of(context).client.presences[Matrix.of(context).client.userID]!.presence.presence}"),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "${event.originServerTs.hour}:"
+                      + "${(event.originServerTs.minute.bitLength > 0)
+                      ? event.originServerTs.minute
+                      : "0" + "${event.originServerTs.minute}"}",
+                  style: TextStyle(
+                      fontSize: 8,
+                      color: Colors.grey[50]
+                  ),
                 ),
-              ),
-              Icon(
-                Icons.check,
-                size: 8,
-                color: Colors.grey[50],
-              )
-            ],
-          )
+                Icon(
+                  Icons.check,
+                  size: 8,
+                  color: Colors.grey[50],
+                )
+              ],
+            )
           ],
         ),
       )
-    );
-/*Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15),
-              topRight: Radius.circular(15),
-              bottomLeft: Radius.circular(15)
-          ),
-          gradient: LinearGradient(
-              colors: [Colors.white, Colors.grey],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter
-          ),
-          boxShadow: [BoxShadow(
-            blurRadius: 20,
-            offset: Offset(10, 10),
-            color: Colors.black,
-          ),],
-        ),
-        padding: EdgeInsets.all(5),
-        margin: EdgeInsets.all(10),
-        constraints: BoxConstraints(maxWidth: 330),
-        width: MediaQuery.of(context).size.width / 2,
-        child: ListTile(
-          title: Text(
-            "${event.senderId}",
-            style: TextStyle(color: Colors.black),
-          ),
-          subtitle: Text(
-            "${event.content['body']}",
-            style: TextStyle(color: Colors.black),
-          ),
-        )
-    );*/
-  }
-
+  );
 }
