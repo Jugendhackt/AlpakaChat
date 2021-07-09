@@ -36,7 +36,9 @@ class ChatPage extends StatelessWidget {
                 if (update.content != null &&
                     update.content.containsKey('type') &&
                     update.content['type'] == "m.room.message" &&
-                    update.content['event_id'].startsWith("\$")) {
+                    update.content['event_id'].startsWith("\$") &&
+                    update.roomID == room.id
+                ) {
                   MatrixEvent newEvent = MatrixEvent.fromJson(update.content);
                   _messages.firstWhere((element) => element.eventId == newEvent.eventId, orElse: () {_messages.insert(0, newEvent); return MatrixEvent();});
                 }
