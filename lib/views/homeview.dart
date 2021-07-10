@@ -68,8 +68,9 @@ class _homeview extends State<Homeview>{
                   tileColor: room.isUnread ? Colors.lightGreen : null,
                   leading:
                   room.avatar?.getThumbnail(Matrix.of(context).client) != null
-                      ? Image.network("${room.avatar?.getThumbnail(Matrix.of(context).client, width: 64, height: 64, method: ThumbnailMethod.crop )}")
-                      : Icon(room.isUnread ? Icons.notification_important : Icons.account_box),
+                      ? Image.network("${room.avatar?.getThumbnail(Matrix.of(context).client, width: 38, height: 38, method: ThumbnailMethod.crop ).replace(port: Matrix.of(context).client.homeserver.port)}", width: 64, height: 64)
+                  // TODO when https://gitlab.com/famedly/company/frontend/famedlysdk/-/issues/174 is fixed
+                      : Icon(room.isUnread ? Icons.notification_important : Icons.account_box, size: 64),
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
